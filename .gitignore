@@ -1,0 +1,5 @@
+# Output dir for executables.
+bin/
+
+# OS generated files.
+.DS_STORE
