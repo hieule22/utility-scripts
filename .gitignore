@@ -1,3 +1,7 @@
+# Autosaves and temporary files.
+*~
+*#
+
 # Output dir for executables.
 bin/
 
