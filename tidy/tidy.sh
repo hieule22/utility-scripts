@@ -25,7 +25,7 @@ DELETE="d"
 for ARG in "$@"
 do
     case $ARG in
-	-d=*|-directory=*)
+	-dir=*)
 	    DIRECTORY="${ARG#*=}"
 	    shift # Skip past argument=value.
 	    ;;
@@ -33,7 +33,7 @@ do
 	    REGEX="${ARG#*=}"
 	    shift
 	    ;;
-	-recursive=no) # Stop recursing into subdirectories.
+	-norecursive) # Stop recursing into subdirectories.
 	    OPTS+="-prune "
 	    shift
 	    ;;
