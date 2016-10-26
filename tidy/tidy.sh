@@ -8,9 +8,9 @@ REGEX="*~"
 # Key command to perform deletion.
 DELETE="d"
 
+echo "Press d to delete and anything else to skip!"
 junks=( $(find . -name $REGEX) )
 echo "Found" ${#junks[@]} "file(s)."
-echo "Press d to delete and anything else to skip!"
 
 for file in ${junks[@]}
 do
