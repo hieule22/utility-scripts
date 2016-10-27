@@ -46,7 +46,7 @@ done
 
 echo "Press $DELETE to delete and anything else to skip!"
 
-JUNKS=( $(find $DIRECTORY -name $REGEX $OPTS) )
+JUNKS=( $(find $DIRECTORY -name "$REGEX" $OPTS) )
 echo "Found" ${#JUNKS[@]} "file(s)."
 
 for FILE in ${JUNKS[@]}
