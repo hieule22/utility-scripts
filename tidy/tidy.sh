@@ -34,7 +34,7 @@ do
 	    shift
 	    ;;
 	-norecursive) # Stop recursing into subdirectories.
-	    OPTS+="-prune "
+	    OPTS+="-maxdepth 1"
 	    shift
 	    ;;
 	*)
