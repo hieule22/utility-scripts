@@ -1,6 +1,6 @@
 #!/bin/sh
 # Shell script to remove temporary files from all subfolders and directories.
-# Press d to delete junk files and any other key to skip.
+# Press y to remove junk files and any other key to skip.
 # Copyright 2016 Hieu Le
 
 # Echo all command in debugging mode.
@@ -10,7 +10,7 @@ if [ $DEBUG = true ]; then
 fi
 
 # DEFAULT PROGRAM OPTIONS.
-# Regular expression of the file names to be deleted.
+# Regular expression of the file names to be removed.
 REGEX="*~"
 # Root directory to scan.
 DIRECTORY=.
@@ -18,8 +18,8 @@ DIRECTORY=.
 OPTS=""
 
 # PROGRAM CONSTANTS.
-# Keyboard input to perform deletion.
-DELETE="d"
+# Keyboard input to perform removal.
+export REMOVE="y"
 
 # Parse command line arguments.
 for ARG in "$@"
@@ -44,19 +44,22 @@ do
     esac
 done
 
-echo "Press $DELETE to delete and anything else to skip!"
+echo "Press $REMOVE to remove and anything else to skip!"
 
 JUNKS=( $(find $DIRECTORY -name "$REGEX" $OPTS) )
 echo "Found" ${#JUNKS[@]} "file(s)."
 
-for FILE in ${JUNKS[@]}
-do
-    read -n1 -r -s -p $FILE OPT
+rm_file() {
+    local FILE="$1"
+    read -n1 -r -s -p "Remove $FILE? " OPT
     echo  # Begin on new line.
-    if [ "$OPT" == $DELETE ]; then
-	echo "Deleting" $FILE
-	rm $FILE
+    if [ "$OPT" == "$REMOVE" ]; then
+	rm "$FILE"
+	echo "$FILE was successfully removed!"
     else
-	echo "Skipping" $FILE
+	echo "Skipped" $FILE
     fi
-done
+}
+
+export -f rm_file
+find $DIRECTORY -name "$REGEX" $OPTS -exec bash -c 'rm_file "$@"' bash {} \;
