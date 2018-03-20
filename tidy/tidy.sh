@@ -48,8 +48,8 @@ echo "Press $REMOVE to remove and anything else to skip!"
 
 # Since the UNIX 'find' command lists the matched paths on separate lines,
 # the number of paths equals the number of lines output by the command.
-file_count=( $(find $DIRECTORY -name "$REGEX" $OPTS | wc -l) )
-echo "Found $file_count file(s)."
+FILE_COUNT=( $(find $DIRECTORY -name "$REGEX" $OPTS | wc -l) )
+echo "Found $FILE_COUNT file(s)."
 
 rm_file() {
     local FILE="$1"
